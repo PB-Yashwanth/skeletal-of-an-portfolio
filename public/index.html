@@ -1,27 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dr. T. Raja Sree | Academic Portfolio</title>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio - Typing Demo</title>
+  <meta name="description" content="Portfolio demo with improved typing effect" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+  /* ===== Global Reset ===== */
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"Roboto",sans-serif; }
+  :root {
+    --bg-color: #111;
+    --text-color: #e6e6e6;
+    --primary-color: #ffffff;
+    --accent-color: #888;
+    --hover-color: #1e3a8a; /* Dark blue color */
+  }
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+  }
+
+  /* Particles container behind everything */
+  #particles-js {
+    position: fixed; inset:0; width:100%; height:100%; z-index:0;
+  }
+
+  /* Header / nav */
+  .sticky-nav { position: sticky; top:0; background:#0e0e0e; padding:10px 18px; z-index:999; box-shadow:0 2px 6px rgba(0,0,0,0.6); }
+  .navbar { display:flex; gap:12px; justify-content:center; list-style:none; flex-wrap:wrap; }
+  .navbar a { color:var(--text-color); text-decoration:none; font-weight:500; padding:6px; transition:color .18s, transform .18s; }
+  .navbar a:hover { color:var(--hover-color); transform: translateY(-1px); }
+
+  /* Hero */
+  .hero { min-height:78vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; z-index:2; padding:40px 18px; }
+  .hero-content { max-width:1100px; width:100%; }
+  .hero h1 { font-size:3.2rem; color:var(--primary-color); margin-bottom:14px; }
+  .typing-container { font-size:1.6rem; color:var(--primary-color); height:48px; display:inline-block; }
+
+  /* typed text + fade + cursor */
+  #typing { display:inline-block; font-weight:600; letter-spacing:0.4px; transition: opacity 220ms ease; opacity:1; }
+  #typing::after {
+    content:""; display:inline-block; width:2px; height:1.2em; margin-left:8px; vertical-align:bottom;
+    background:var(--primary-color); animation:blink 0.7s steps(1) infinite;
+  }
+  @keyframes blink { 50%{ opacity:0 } }
+
+  #typing.fade { opacity:0 }
+
+  #typing:hover::after { background:var(--accent-color); transform:scaleX(1.05); }
+
+  /* Sections */
+  main.container { position:relative; z-index:2; }
+  section { padding:72px 18px; border-bottom:1px solid #262626; transition: background-color 0.3s ease; }
+  section:hover { background-color: var(--hover-color); }
+  section h2, section h1 { color:var(--primary-color); margin-bottom:12px; text-transform: capitalize; }
+
+  /* Footer */
+  footer { text-align:center; padding:18px; background:#0e0e0e; color:var(--accent-color); position:relative; z-index:2; }
+
+  /* Back-to-top */
+  #back-to-top { position:fixed; right:22px; bottom:22px; background:var(--primary-color); color:var(--bg-color);
+    border:none; padding:10px 12px; border-radius:6px; cursor:pointer; display:none; z-index:999; box-shadow:0 6px 20px rgba(0,0,0,0.5);
+    transition: transform .15s ease;
+  }
+  #back-to-top.show { display:inline-block; }
+  #back-to-top:hover { transform:translateY(-3px); }
+
+  /* keep content readable above particles */
+  .container, footer, header, .hero { position:relative; }
+
+  /* small responsive tweak */
+  @media (max-width:600px) {
+    .hero h1 { font-size:2.2rem; }
+    .typing-container { font-size:1.15rem; }
+    .navbar { gap:8px; }
+    .navbar a { font-size:0.9rem; }
+  }
+  </style>
 </head>
 <body>
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="spinner"></div>
-  </div>
 
-  <!-- Particles background -->
-  <div id="particles-js"></div>
+  <!-- particles background -->
+  <div id="particles-js" aria-hidden="true"></div>
 
-  <!-- Navigation bar -->
-  <header class="sticky-nav">
-    <nav>
+  <!-- nav -->
+  <header class="sticky-nav" role="banner">
+    <nav aria-label="Main navigation">
       <ul class="navbar">
-        <li><a href="#name">Profile</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#outreach">Outreach</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#publications">Publications</a></li>
@@ -29,299 +100,170 @@
         <li><a href="#conferences">Conferences</a></li>
         <li><a href="#workshops">Workshops</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#teaching">Teaching</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#students">Students</a></li>
+        <li><a href="#teaching-skills">Teaching Skills</a></li>
+        <li><a href="#students-guided">Students Guided</a></li>
         <li><a href="#responsibilities">Responsibilities</a></li>
-        <li><a href="#outreach">Outreach</a></li>
         <li><a href="#references">References</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Main container -->
+  <!-- hero -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-content">
+      <h1 id="hero-heading">Your Name</h1>
+      <div class="typing-container" aria-live="polite">
+        <span id="typing" aria-hidden="false"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- main content with 13 sections -->
   <main class="container">
-    <!-- Profile -->
-    <section id="name" class="section">
-      <div class="hero-content">
-        <div class="hero-left">
-          <img src="profile.jpg" alt="Dr. T. Raja Sree" class="profile-square"/>
-        </div>
-        <div class="hero-right">
-          <h2>Dr. T. Raja Sree</h2>
-          <p>Ph.D. (CSE, NIT Trichy)<br>M.Tech (IT, Anna University)<br>B.Tech (IT, Anna University)</p>
-          <div id="interest-typing" class="typing"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p>1/2 Athikattuvilai, Manikettipottal post<br>Kanyakumari District, Tamil Nadu – 629501</p>
-      <p>Email: rajasree.t@vit.ac.in | trajasree87@gmail.com</p>
-      <p>Phone: +91 9789599698</p>
-      <p>ORCID: <a href="https://orcid.org/0000-0002-6960-3307" target="_blank">0000‑0002‑6960‑3307</a></p>
-      <p>ResearchGate: <a href="https://www.researchgate.net/profile/Raja_Sree2" target="_blank">Raja Sree2</a></p>
-    </section>
-
-    <!-- Research Interests -->
-    <section id="research" class="section">
-      <h2>Research Interests</h2>
-      <ul>
-        <li>Distributed Computing</li>
-        <li>Cloud Computing</li>
-        <li>Cloud–Fog Security</li>
-      </ul>
-    </section>
-
-    <!-- Education -->
-    <section id="education" class="section">
-      <h2>Education</h2>
-      <button class="collapsible">Ph.D. CSE (NIT Trichy, Sep 2012–May 2018)</button>
-      <div class="collapsible-content">
-        <p>Thesis: Detection of HTTP Flooding Attacks in Cloud<br>Supervisor: Dr. S. Mary Saira Bhanu</p>
-      </div>
-      <button class="collapsible">M.Tech. IT (Anna University, Jul 2008–May 2010)</button>
-      <div class="collapsible-content">
-        <p>CGPA: 9.56 (Gold Medalist, University First Rank)</p>
-      </div>
-      <button class="collapsible">B.Tech. IT (Anna University, Jul 2004–May 2008)</button>
-      <div class="collapsible-content">
-        <p>Percentage: 82%</p>
-      </div>
-    </section>
-
-    <!-- Publications -->
-    <section id="publications" class="section">
-      <h2>Peer‑Reviewed Publications</h2>
-      <button class="collapsible">International Journals</button>
-      <div class="collapsible-content">
-        <ul>
-          <li>Sam Prince Franklin S, Mary Shamala L., T. Raja Sree – Decentralized certificate issuance and verification using Ethereum blockchain, JNCA (SCI, IF 7.7)</li>
-          <li>Ashank Priyadarshi, T. Raja Sree – Multi-tier Blockchain-based Land Registry using Fog Computing, IEEE Access (SCI, IF 3.4)</li>
-          <li>S. Deepshika, T. Raja Sree – Wearable Device for COVID‑19 detection, IETE Journal of Research (SCI, IF 2.810)</li>
-          <li>T. Veni & T. Raja Sree – Mobility-aware secure computation offloading, Journal of Cloud Computing (SCI, IF 2.810)</li>
-          <li>T. Raja Sree, S. Kanmani, FogSec: A comprehensive review of the role of soft computing
- techniques in municipal solid waste management, Environmental Technology Reviews, Taylor
- and Francis, (SCI, IF.1.310) DOI: https://doi.org/10.1080/21622515.2023.2293679</li>
-<li>T. Raja Sree, R. Harish, T. Veni FogSec: A secure and e ective mutual authentication scheme
- for fog computing, Concurrency and Computation: Practice and Experience, Wiley, (SCI,
- IF.3.310) DOI: https://doi.org/10.1002/cpe.8054</li>
-<li>Rahul Vijay, T. Raja Sree, Resource Scheduling and Load Balancing Algorithms in Cloud 
-computing, Procedia Computer Science, Elsevier, DOI: https://doi.org/10.1016/j.procs.2023.12.088</li>
-<li>Rahul Vijay, T. Raja Sree, Resource Scheduling and Load Balancing Algorithms in Cloud computing, 
-Procedia Computer Science, Elsevier, DOI: https://doi.org/10.1016/j.procs.2023.12.088</li>
-<li>T. Raja Sree, A framework for disaster management techniques using fuzzy bat clustering
- in fog computing, International Journal of System Assurance Engineering and Management,
- Springer, (SCI, IF.1.721)</li>
-<li>T. Raja Sree and S. Mary Saira Bhanu, Detection of HTTP coding attacks in cloud using
- Fuzzy Bat Clustering, Neural Computing and Applications, Springer, 32, pp. 9603-9619 , 2020,
- DOI: 10.1007/s00521-019-04473-6 (SCI, IF: 5.306)</li>
-<li>T. Raja Sree and S. Mary Saira Bhanu, Secure Logging Scheme for forensic analysis in Cloud,
- Concurrency and Computation Practice and Experience, Wiley, 31(15), pp. 117, 2019, DOI:
- 10.1002/cpe.5143 (SCI, IF: 1.831)</li>
-</li>T. Raja Sree and S. Mary Saira Bhanu, HAP: Detection of HTTP ooding attacks in Cloud
- using Di usion Map and A nity Propagation Clustering, IET Information Security, IEEE
- publishers, 13(3), 188200, 2018, DOI: 10.1049/iet-ifs.2018.5382 (SCI, IF: 1.478)</li>
-<li>T. Raja Sree, S. Mary Saira Bhanu, Investigation of application layer DDoS attacks using
- clustering techniques, International Journal of Wireless and Microwave Technologies (IJWMT),
- MECS Publishers, 3, pp. 113, 2018, DOI: 10.5815/ijwmt.2018.03.01</li>
-</li>T. Raja Sree and S. Mary Saira Bhanu, Detection of HTTP ooding attacks in cloud using
- dynamic entropy method, Arabian journal for Science and Engineering, Springer, 43(12), pp.
- 69957014, 2018, DOI: 10.1007/s13369-017-2939-7 (SCI, IF: 2.807)</li>
-</li>T. Raja Sree and S. Mary Saira Bhanu, HADM: detection of HTTP GET ooding attacks by
- using Analytical hierarchical process and Dempster-Shafer theory with MapReduce, Security
- and Communication Networks, Wiley, 9(17), pp. 43414357, 2016, DOI: 10.1002/sec.1611
- (SCI, IF: 1.968)</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Book Chapters -->
-    <section id="book-chapters" class="section">
-      <h2>Book Chapters</h2>
-      <button class="collapsible">Contributions</button>
-      <div class="collapsible-content">
-        <ul>
-<li>T. Raja Sree and S. Mary Saira Bhanu, Book chapter titled as Improving UAV fault detection through a hybrid CNN-LSTM-GRU framework for sensor data analysis, in the book Innovations and Developments in Unmanned Aerial Vehicles, ISBN: 979-836938464-0, DOI: 10.4018/979-8-3693-8462-6.ch013</li>
-<li>T. Raja Sree and S. Mary Saira Bhanu, Role of machine learning in real-life environment, in the book IoT and Machine Learning for Smart Applications, ISBN: 9781032623276, DOI: 10.1201/9781032623276-5</li>
-<li>T. Raja Sree and S. Mary Saira Bhanu, Book chapter titled as Data Collection techniques for Forensic Investigation in Cloud, in the book Digital Forensic Science, ISBN: 978-1-83880-2608, DOI: 10.5772/intechopen.82013</li>
-</ul>
-      </div>
-    </section>
-
-    <!-- Conferences -->
-    <section id="conferences" class="section">
-      <h2>International Conferences</h2>
-      <button class="collapsible">Conferences</button>
-      <div class="collapsible-content">
-        <ul>
-          <li>T. Raja Sree and Mary Shamala L, Block chain based voting system, 2023 2nd International
- Conference on Smart Technologies and Systems for Next Generation Computing (ICSTSN),
- 10.1109/ICSTSN57873.2023.10151630 (Scopus Indexed)</li>
-<li>Mary Shamala, L. Balasaraswathi, V., Shobana, M., Zayaraz, G., Radhika, R., T. Raja Sree,
- (2023). An E cient and Recoverable Symmetric Data Aggregation Approach for Ensuring the
- Content Privacy of Internet of Things, Big Data and Cloud Computing. ICBCC 2022. Lecture
- Notes in Electrical Engineering, vol 1021. Springer, Singapore. https://doiorg/10.1007/978-981-99-1051-918 (Scopus Indexed)</li>
-<li>T. Raja Sree, A Framework for Disaster Monitoring using Fog Compuing, Congress on Intel
-ligent Systems (CIS) 2020 World Conference in Virtual Format Organized by Soft Computing
- Research Society, LNCS Springer proceedings, (Scopus Indexed)</li>
-<li>T. Raja Sree and S. Mary Saira Bhanu, Identifying HTTP DDoS Attacks using Self Organizing Map and Fuzzy Logic in Internet based Environments, International conference on 
-Advanced Computing, Networking and Informatics. Smart Innovation, Systems and Technologies,
- LNCS Springer proceedings, vol 44, pp.259-269, DOI: 10.1007/978-81-322-2529
-427(Scopus Indexed)</li>
-<li>T. Raja Sree and S. Mary Saira Bhanu, Preprocessing of Log Files Using Di usion Map for
- Forensic Examination, International Conference on Communication and Networks (ComNet
-2016). Advances in Intelligent Systems and Computing, LNCS Springer proceedings, vol. 508,
- pp. 403410, 2017, DOI: 10.1007/978-981-10-2750-542(Scopus Indexed)</li>
-</li>G. Priyadharshini and T. Raja Sree, Minimizing the tra c for wireless sensor networks using
- Qos localized routing protocol, ISCO-2012, Karpagam college of Engineering, Coimbatore, 6-7
- January 2012</li>
-<li>T. Raja Sree and P. Ganesh Kumar, Non-revisited Genetic Algorithm for Function Optimiza
-tion, International Conference on Innovative Computing Technologies (MKCEICICT 2010), 
-M.Kumarasamy college of Engineering, Karur, India, pp. 253260, 1213 February 2010</li>
-<li>T. Raja Sree and P. Ganesh Kumar, Adaptive Non-revisited Genetic Algorithm using BSP for
- Function Optimization, International Conference on Embedded Systems (ICES 2010), 
- Coimbatore Institute of Technology, Coimbatore, India, 14-15 July 2010</li>
-
-        </ul>
-      </div>
-    </section>
-
-    <!-- Workshops -->
-    <section id="workshops" class="section">
-      <h2>Workshops & Short Courses</h2>
-      <button class="collapsible">Workshops & Courses</button>
-      <div class="collapsible-content">
-        <ul>
-          <li>Five days International online workshop on New Trends in Fuzzy and Rough Set Theory and its
- Applications [FRSTA-2020] , Manipal University Jaipur, September 25-29,2020</li>
-<li>One Week workshop on AWS Console Services, Department of IT, SRM Institute of Science and Technology Kattankulathur, 28–02 October 2020.</li>
-<li>Five days online short term program on Intellectual Property Rights, Dr. B. R. Ambedkar National Institute of Technology, Jalandhar, Punjab, 18–22 August 2020.</li>
-<li>Five days Faculty Development Program on Value Addition on Emerging Information Technologies, Dr. M.G.R Educational and Research Institute, Chennai, 10–14 August 2020.</li>
-<li>Webinar on Prior Art Searching with Google Patents, Turnip Innovation Private Limited, 26 June 2020.</li>
-<li>One Week Faculty Development Program on Recent Trends in Information Technology, Kalasalingam Academy of Research and Education, 18–24 May 2020.</li>
-<li>Twelve days GIAN Course on Mobile Cloud Security, secured A-grade, organized by the CSE Dept., IIT Madras, 6–17 June 2016.</li>
-<li>Workshop on Big Data Analytics using Hadoop eco-system tools, organized by CDAC Chennai, 12–15 August 2015.</li>
-<li>Workshop on Cloud Computing, organized by IST Dept., Anna University, Chennai, 9–13 December 2013.</li>
-<li>Short term course on Technical Writing for Research Scholars in Engineering and the Sciences, organized by NIT Trichy, 25–26 May 2013.</li>
-<li>Two days Master Trainer program on OOPS using C++, organized by ICT Academy and Kalasalingam University, 29–30 July 2011.</li>
-
-
-       </ul>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" class="section">
-      <h2>Work Experience</h2>
-      <button class="collapsible">Experience Details</button>
-      <div class="collapsible-content">
-        <ul>
-<li>Assistant Professor Senior (July 2022 till date), Department of Computer Science and Engineering, Vellore Institute of Technology, Chennai Campus, Chennai.</li>
-<li>Assistant Professor (September 2020 November 2021), Department of Computer Science and Engineering, SRM Institute of Science and Technology, Kattankulathur Campus, Chennai.</li>
-<li>Adhoc Faculty (December 2017 August 2020), Department of Computer Science and Engineering, NIT Calicut, Kerala.</li>
-<li>Teaching Assistant (2013 2015) for the level I and level II courses, Department of CSE, NIT Trichy.</li>
-<li>Assistant Professor (July 2010 September 2012), Department of Information Technology, Kalasalingam University, Krishnankoil.</li>
-</ul>
-      </div>
-    </section>
-
-    <!-- Teaching -->
-    <section id="teaching" class="section">
-      <h2>Teaching</h2>
-      <button class="collapsible">Teaching Areas</button>
-      <div class="collapsible-content">
-        <ul>
-          <li>Cloud Computing</li>
-          <li>Distributed Computing</li>
-          <li>Computational Intelligence</li>
-          <li>Operating Systems</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" class="section">
-      <h2>Skills</h2>
-      <button class="collapsible">Technical & Soft Skills</button>
-      <div class="collapsible-content">
-        <ul>
-          <li>OpenStack, Hadoop Framework</li>
-          <li>Wireshark, Snort, OSForensics</li>
-          <li>C, C++, Java, Python</li>
-          <li>LaTeX, Web Server & Linux</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Student Projects -->
-    <section id="students" class="section">
-      <h2>Student Projects Supervised (P.G.)</h2>
-      <button class="collapsible">Project Titles</button>
-      <div class="collapsible-content">
-        <ul>
-          <li>QoS-based routing for Wireless Sensor Networks</li>
-          <li>Anonymous & lightweight mutual authentication for fog computing</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Responsibilities -->
-    <section id="responsibilities" class="section">
-      <h2>Academic & Administrative Responsibilities</h2>
-      <button class="collapsible">Roles & Committees</button>
-      <div class="collapsible-content">
-        <ul>
-          <ul>
-<li>Course Coordinator (eLab) programming laboratory for rst year, SRM Institute of Science and Technology, Kattankulathur, Chennai.</li>
-<li>Faculty Advisor for Final year, SRM Institute of Science and Technology, Kattankulathur, Chennai.</li>
-<li>Online Complaint Portal for Engineering Maintenance Unit NITC along with MCA Students, NIT Calicut.</li>
-<li>Parents Teachers Interaction application WATSALYA Evaluation Committee, NIT Calicut.</li>
-<li>M.Tech., M.C.A and B.Tech. Project Evaluation Committee, NIT Calicut.</li>
-<li>AICTESponsored FDPonCapacity Building of Women, Coordinator, SRM Institute of Science and Technology, July 12-16, 2021.</li>
-<li>AICTE Sponsored FDP on Capacity Building of Women in Higher Education, Organizer, SRM Institute of Science and Technology, January 25-29, 2021.</li>
-<li>Smart India Hackathon 2019 (Software Edition), Organizing Committee Member (Accommodation Co-ordinator), NIT Calicut.</li>
-<li>NBA SAR for Undergraduate and Postgraduate Engineering (Criteria 2 & 5), NIT Calicut.</li>
-<li>IT Dept. Library Incharge, Kalasalingam University Krishnankoil.</li>
-<li>Time Table and Research & Consultancy activities, Kalasalingam University Krishnankoil.</li>
-</ul>
-      </div>
-    </section>
-
-    <!-- Outreach -->
-    <section id="outreach" class="section">
-      <h2>Outreach Activities</h2>
-      <button class="collapsible">Outreach Events</button>
-      <div class="collapsible-content">
-        <ul>
-<li>Talk Delivered- Latex Overview, Saveetha College of Engineering Chennai, 13 April 2023.</li>
-<li>Talk Delivered- Webinar on Artificial Intelligence in Civil Engineering, KPR College of Engineering Coimbatore, 01st August 2020.</li>
-<li>Session Chair- Virtual International conference on Innovation in Interdisplinary Research 2020, Kalasalingam Academy of Research and Education, Krishnankoil, 23-24 June 2020.</li>
-<li>Talk Delivered- Webinar on Recent Trends in Cloud Computing- JPR SSR college of Engineering, Chennai, 8th June 2020.</li>
-<li>Talk Delivered- Webinar on Recent Trends in Fog Computing- Kalasalingam Academy of Research and Education, Krishnankoil, 24th May 2020.</li>
-<li>Talk Delivered- Cloud Security- National Conference SPIN 2019 in Dept. of CSE, Viswajyothi College of Engineering and Technology Ernakulam, Kerala, 25-26 April 2019.</li>
-<li>Reviewer of National Conference SPIN 2019.</li>
-<li>Reviewer of internationally renowned ACM conference and journals.</li>
-</ul>
-      </div>
-    </section>
-
-    <!-- References -->
-    <section id="references" class="section">
-      <h2>References</h2>
-      <ul>
-        <li><strong>Dr. S. D. Madhu Kumar</strong><br>Professor, CSE, NIT Calicut<br>Email: madhu@nitc.ac.in</li>
-      </ul>
-    </section>
+    <section id="home"><h1>Home</h1><p>Welcome to my professional portfolio. This section provides an overview of my background and expertise.</p></section>
+    <section id="outreach"><h2>Outreach</h2><p>Details about my outreach activities and community engagement.</p></section>
+    <section id="research"><h2>Research</h2><p>Information about my research projects and areas of interest.</p></section>
+    <section id="education"><h2>Education</h2><p>My educational background and qualifications.</p></section>
+    <section id="publications"><h2>Publications</h2><p>List of my published research papers and articles.</p></section>
+    <section id="book-chapters"><h2>Book Chapters</h2><p>Contributions to book chapters and edited volumes.</p></section>
+    <section id="conferences"><h2>Conferences</h2><p>Conference presentations and participation.</p></section>
+    <section id="workshops"><h2>Workshops</h2><p>Workshops conducted and attended.</p></section>
+    <section id="experience"><h2>Experience</h2><p>Professional work experience and career history.</p></section>
+    <section id="teaching-skills"><h2>Teaching Skills</h2><p>Teaching methodologies and pedagogical approaches.</p></section>
+    <section id="students-guided"><h2>Students Guided</h2><p>Students mentored and supervised.</p></section>
+    <section id="responsibilities"><h2>Responsibilities</h2><p>Administrative and academic responsibilities undertaken.</p></section>
+    <section id="references"><h2>References</h2><p>Professional references and contact information.</p></section>
   </main>
 
-  <footer class="section">
-    &copy; 2025 Dr. T. Raja Sree. All rights reserved.
-  </footer>
+  <button id="back-to-top" aria-label="Back to top">⬆</button>
 
-  <!-- Script -->
-  <script src="script.js"></script>
+  <footer><p>&copy; <span id="year"></span> Your Name. All rights reserved.</p></footer>
+
+  <!-- scripts -->
+  <script>
+  // auto year
+  document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+  /***** Improved typing (fade + natural timing) *****/
+  (function(){
+    const typedText = document.getElementById("typing");
+    if (!typedText) return;
+
+    const words = ["Mentor", "Educator", "Researcher"];
+    let wordIndex = 0, letterIndex = 0, isDeleting = false;
+
+    const baseTypeSpeed = 120;
+    const baseDeleteSpeed = 70;
+    const pauseBetweenWords = 900;
+    const pauseBeforeNext = 260;
+    const fadeDuration = 220; // matches CSS transition
+
+    function humanDelay(base) {
+      return base + Math.floor((Math.random() * 50) - 25);
+    }
+
+    let timer = null;
+    function schedule(fn, ms) {
+      clearTimeout(timer);
+      timer = setTimeout(fn, ms);
+    }
+
+    function loop() {
+      const current = words[wordIndex];
+      if (!isDeleting) {
+        letterIndex = Math.min(letterIndex + 1, current.length);
+        typedText.textContent = current.slice(0, letterIndex);
+      } else {
+        letterIndex = Math.max(letterIndex - 1, 0);
+        typedText.textContent = current.slice(0, letterIndex);
+      }
+
+      let delay = humanDelay(isDeleting ? baseDeleteSpeed : baseTypeSpeed);
+
+      if (!isDeleting && letterIndex === current.length) {
+        // fade then delete
+        schedule(() => typedText.classList.add("fade"), Math.max(0, pauseBetweenWords - fadeDuration));
+        schedule(() => {
+          typedText.classList.remove("fade");
+          isDeleting = true;
+          loop();
+        }, pauseBetweenWords);
+        return;
+      }
+      if (isDeleting && letterIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typedText.classList.remove("fade");
+        schedule(loop, pauseBeforeNext);
+        return;
+      }
+
+      schedule(loop, delay);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // small startup delay so it sits nicely after page load
+      setTimeout(loop, 300);
+    });
+  })();
+  </script>
+
+  <script>
+  /***** Back-to-top button behavior *****/
+  (function(){
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) btn.classList.add('show');
+      else btn.classList.remove('show');
+    });
+    btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  })();
+  </script>
+
+  <script>
+  /***** particles.js loader (optional) *****/
+  (function(){
+    // attempt to load particles if library + config exist; fail silently otherwise
+    if (window.particlesJS) {
+      try {
+        particlesJS.load('particles-js', 'particles.json', function() {
+          console.log('particles loaded');
+        });
+      } catch(e) {
+        // ignore
+      }
+    } else {
+      // if you want a tiny fallback dot effect without particles lib, uncomment this:
+      /*
+      const el = document.getElementById('particles-js');
+      el.style.background = "radial-gradient(circle at 10% 20%, rgba(255,255,255,0.02), transparent 1%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.02), transparent 1%)";
+      */
+    }
+  })();
+  </script>
+
+  <!-- Optional typing click sound:
+       To use: add a small click mp3 at audio/click.mp3 and uncomment the block below.
+  -->
+  <!--
+  <script>
+  (function(){
+    const clickSound = new Audio('audio/click.mp3');
+    // add hooking into typing loop where letters are added (requires altering the typing function to call playClick())
+    function playClick(){
+      try {
+        const s = clickSound.cloneNode();
+        s.volume = 0.06;
+        s.play().catch(()=>{});
+      } catch(e){}
+    }
+  })();
+  </script>
+  -->
+
 </body>
 </html>
+
